@@ -25,3 +25,8 @@
 
 - Query와 Mutation 객체는 각각 GraphQL의 query와 mutation 요청을 처리하는 엔드포인트 역할.
 - Query는 데이터를 조회하는 역할을 하고, Mutation은 데이터를 변경(추가, 수정, 삭제 등)하는 데 사용.
+
+# 아플로 클라이언트
+
+- 아폴로 클라리언트 설정 서버와 통신 하기 위해 인스턴스 생성
+- 클라이언트를 인자로 받는 HOC(higher-order component) 즉 main ts인 ApolloProvider로 App을 감싸줍니다.
