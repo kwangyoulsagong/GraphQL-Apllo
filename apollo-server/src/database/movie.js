@@ -8,7 +8,7 @@ const movies = [
     description:
       "백두산 폭발을 막기 위한 정부와 전문가들의 치열한 사투를 그린 영화.",
     genre: ["Action", "Drama", "Thriller"],
-    video: "https://www.youtube.com/watch?v=MIW2aUhCOaw",
+    video: "https://www.youtube.com/watch?v=vBvt8GP53qA",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const movies = [
       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20200103_41%2F1578032244761ejKMX_JPEG%2Fmovie_image.jpg",
     description: "1970년대 대한민국의 정치적 음모와 배신을 그린 정치 스릴러.",
     genre: ["Drama", "Thriller", "History"],
-    video: "https://www.youtube.com/watch?v=FqyHdERatW8",
+    video: "https://www.youtube.com/watch?v=vqi9oKz1GOM",
   },
   {
     id: 4,
@@ -165,7 +165,7 @@ const movies = [
       "https://i.namu.wiki/i/VesmuHyreyTNvWMTaIjJEqoGUiv54I5tdQI2TaccqLV46Nt-JSkAXi33KHsGoKuyMSwmKeeqF9Xe3wrNcIgEfTiqEjgLRX5pVLnORaZ_F25kSg02GdTXcM2jBZOHuxnB9sRsRzqTLAXPy3SS3tDnmA.webp",
     description: "기억을 잃어버린 남자의 과거를 추적하는 스릴러.",
     genre: ["Thriller", "Mystery", "Drama"],
-    video: "https://www.youtube.com/watch?v=AwSorP0y4NU",
+    video: "https://www.youtube.com/watch?v=Fvv89erjnzA",
   },
   {
     id: 17,
