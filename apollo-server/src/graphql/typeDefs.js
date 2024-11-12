@@ -14,8 +14,11 @@ import { gql } from "apollo-server";
 const typeDefs = gql`
   type Movie {
     id: Int!
-    name: String
-    rating: Int!
+    name: String!
+    rating: Float!
+    thumbnail: String
+    description: String
+    genre: [String!]
   }
 
   type Query {
@@ -24,7 +27,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addMovie(name: String!, rating: Int!): Movie!
+    addMovie(
+      name: String!
+      rating: Float!
+      thumbnail: String
+      description: String
+      genre: [String!]
+    ): Movie!
   }
 `;
 export default typeDefs;

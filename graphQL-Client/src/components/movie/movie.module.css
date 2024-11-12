@@ -1,0 +1,146 @@
+/* movie.module.css */
+.container {
+  width: inherit;
+  background-color: #2d1b69;
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.movieCard {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.movieCard:hover {
+  transform: scale(1.05);
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 2/3;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+.movieCard:hover .overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.movieInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movieCard:hover .movieInfo {
+  transform: translateY(0);
+}
+
+.title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.star {
+  color: #e50914;
+  margin-right: 0.5rem;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loadingSpinner {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid transparent;
+  border-top-color: #e50914;
+  border-bottom-color: #e50914;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.errorMessage {
+  text-align: center;
+  color: #e50914;
+  padding: 1rem;
+}
+.description {
+  color: white;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.genreWrapper {
+  display: flex;
+  color: #fff;
+  gap: 10px;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
