@@ -9,6 +9,7 @@ export const GET_MOVIES = gql`
       thumbnail
       description
       genre
+      video
     }
   }
 `;

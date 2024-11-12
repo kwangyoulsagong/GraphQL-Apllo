@@ -5,4 +5,8 @@ export interface movieState {
   thumbnail: string;
   description: string;
   genre: [];
+  video: string;
+}
+export interface MoviesData {
+  movies: movieState[];
 }

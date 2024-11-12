@@ -20,6 +20,7 @@ const resolvers = {
         thumbnail,
         description,
         genre,
+        video,
       };
       movies.push(newMovie);
       return newMovie;

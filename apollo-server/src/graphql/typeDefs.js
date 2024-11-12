@@ -19,6 +19,7 @@ const typeDefs = gql`
     thumbnail: String
     description: String
     genre: [String!]
+    video: String
   }
 
   type Query {
@@ -33,6 +34,7 @@ const typeDefs = gql`
       thumbnail: String
       description: String
       genre: [String!]
+      video: String
     ): Movie!
   }
 `;
