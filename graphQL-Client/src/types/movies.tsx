@@ -1,10 +1,10 @@
 export interface movieState {
-  id: number;
+  id?: number;
   name: string;
   rating: number;
   thumbnail: string;
   description: string;
-  genre: [];
+  genre: string[];
   video: string;
 }
 export interface MoviesData {
