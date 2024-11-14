@@ -40,6 +40,7 @@ export const ADD_MOVIE_MUTATION = gql`
     }
   }
 `;
+
 export const UPDATE_MOVIE_Mutation = gql`
   mutation UpdateMovie(
     $id: Int!
@@ -66,6 +67,13 @@ export const UPDATE_MOVIE_Mutation = gql`
       description
       genre
       video
+    }
+  }
+`;
+export const DELETE_MOVIE_Mutation = gql`
+  mutation DeleteMovie($id: Int!) {
+    deleteMovie(id: $id) {
+      id
     }
   }
 `;

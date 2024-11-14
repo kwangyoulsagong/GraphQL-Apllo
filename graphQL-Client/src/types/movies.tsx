@@ -1,5 +1,5 @@
 export interface movieState {
-  id?: number;
+  id: number;
   name: string;
   rating: number;
   thumbnail: string;

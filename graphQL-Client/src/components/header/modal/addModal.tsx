@@ -11,6 +11,7 @@ interface closeModalState {
 const AddModal = ({ closeModal }: closeModalState) => {
   const [genreValue, setGenreValue] = useState("");
   const [body, setBody] = useState<movieState>({
+    id: 0,
     name: "",
     rating: 0,
     thumbnail: "",

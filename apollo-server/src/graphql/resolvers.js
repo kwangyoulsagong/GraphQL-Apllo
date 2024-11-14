@@ -53,6 +53,15 @@ const resolvers = {
       });
       return movie;
     },
+    deleteMovie: (_, id) => {
+      // ID에 해당하는 영화 찾기
+      const movieIndex = movies.findIndex((movie) => movie.id === id.id);
+      if (movieIndex === -1) return null; // 영화가 없으면 null 반환
+
+      // 해당 영화 삭제
+      const deletedMovie = movies.splice(movieIndex, 1)[0];
+      return deletedMovie;
+    },
   },
 };
 export default resolvers;

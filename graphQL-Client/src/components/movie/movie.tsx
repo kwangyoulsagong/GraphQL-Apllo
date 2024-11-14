@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
-import { GET_MOVIES_QUERY } from "../../schema/movies";
+import { DELETE_MOVIE_Mutation, GET_MOVIES_QUERY } from "../../schema/movies";
 import { movieState } from "../../types/movies";
-import { Heart, Star, Play, Edit2 } from "lucide-react";
+import { Heart, Star, Play, Edit2, Trash } from "lucide-react";
 import styles from "./movie.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -18,6 +18,7 @@ const Movie = () => {
   const [isModal, setIsModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<movieState | null>(null);
+  const [deleteMovie] = useMutation(DELETE_MOVIE_Mutation);
   const handleShowVideo = (link: string) => {
     setIsModal(true);
     setLink(link);
@@ -39,6 +40,23 @@ const Movie = () => {
   const closeEditModal = () => {
     setIsEditModal(false);
     setSelectedMovie(null);
+  };
+  const handleDelete = async (id: number) => {
+    console.log(id);
+    try {
+      const { data } = await deleteMovie({
+        variables: { id },
+        refetchQueries: [{ query: GET_MOVIES_QUERY }],
+      });
+
+      if (data?.deleteMovie) {
+        alert(`${data.deleteMovie.id} 성공적으로 삭제되었습니다.`);
+      } else {
+        alert("영화를 찾을 수 없습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (loading)
@@ -81,6 +99,12 @@ const Movie = () => {
                     onClick={() => handleEdit(movie)}
                   >
                     <Edit2 className={styles.icon} />
+                  </button>
+                  <button
+                    className={styles.iconButton}
+                    onClick={() => handleDelete(movie.id)}
+                  >
+                    <Trash className={styles.icon} />
                   </button>
                 </div>
 

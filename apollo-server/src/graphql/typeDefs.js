@@ -46,6 +46,8 @@ const typeDefs = gql`
       genre: [String]
       video: String
     ): Movie!
+
+    deleteMovie(id: Int!): Movie!
   }
 `;
 export default typeDefs;
