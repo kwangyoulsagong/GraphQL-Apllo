@@ -8,7 +8,10 @@ const resolvers = {
     },
   },
   Mutation: {
-    addMovie: (_, { name, rating }) => {
+    addMovie: (
+      _,
+      { name, rating, thumbnail = "", description = "", genre = [], video = "" }
+    ) => {
       // 영화 제목 중복 검사
       if (movies.find((movie) => movie.name === name)) return null;
       // 데이터베이스에 추가

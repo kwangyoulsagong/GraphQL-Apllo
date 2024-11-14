@@ -30,3 +30,165 @@
 
 - 아폴로 클라리언트 설정 서버와 통신 하기 위해 인스턴스 생성
 - 클라이언트를 인자로 받는 HOC(higher-order component) 즉 main ts인 ApolloProvider로 App을 감싸줍니다.
+
+## UseQuery
+
+API에 쿼리를 보낼 때는 필드별로 데이터 요청합니다. 필드들은 서버에서 받은 JSON 데이터 응답의 동일한 필드에 매핑시킵니다.
+GraphQL 쿼리는 문자열 형태로 서버로 전송되어, 서버에서 읽은후 클라이언트에 다시 JSON 형태로 반환됩니다.
+
+```
+export const GET_MOVIES_QUERY = gql`
+  query {
+    movies {
+      id
+      name
+      rating
+      thumbnail
+      description
+      genre
+      video
+    }
+  }
+`;
+```
+
+```
+const { loading, error, data } = useQuery(GET_MOVIES_QUERY);
+const [moviesData, setMoviesData] = useRecoilState(moviesDataState);
+
+
+useEffect(() => {
+    if (data) {
+      setMoviesData(data);
+    }
+}, [data, setMoviesData]);
+
+
+ if (loading)
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
+      </div>
+    );
+
+if (error)
+    return <div className={styles.errorMessage}>Error: {error.message}</div>;
+
+ {moviesData?.movies.map((movie: movieState) => (
+    <div key={movie.id} className={styles.movieCard}>
+        <div className={styles.imageWrapper}>
+            <img
+                src={movie.thumbnail}
+                alt={movie.name}
+                className={styles.image}
+            />
+            <div className={styles.overlay}>
+                <div className={styles.likeButton}>
+                  <button className={styles.iconButton}>
+                    <Heart className={styles.icon} />
+                  </button>
+                </div>
+                <div
+                  className={styles.playButtonWrapper}
+                  onClick={() => handleShowVideo(movie.video)}
+                >
+                  <button className={styles.playButton}>
+                    <Play className={styles.playIcon} />
+                  </button>
+                </div>
+
+                <div className={styles.movieInfo}>
+                  <h3 className={styles.title}>{movie.name}</h3>
+                  <p className={styles.description}>{movie.description}</p>
+
+                  <div className={styles.footer}>
+                    <div className={styles.rating}>
+                      <Star className={styles.starIcon} />
+                      <span>{movie.rating}</span>
+                    </div>
+                    <div className={styles.genreWrapper}>
+                      {movie.genre.map((genre, index) => (
+                        <span key={index} className={styles.genreTag}>
+                          {genre}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+))}
+```
+
+## UseMutation
+
+GraphQL Mutation은 REST API 처럼, PUT, POST, DELETE 요청과 유사한 객체를 만들어서 수정합니다.
+뮤테이션은 요청은 쿼리 요청과 동일한 엔드 포인트로 전송됩니다.
+
+```
+export const ADD_MOVIE_MUTATION = gql`
+  mutation AddMovie(
+    $name: String!
+    $rating: Float!
+    $thumbnail: String!
+    $description: String!
+    $genre: [String!]
+    $video: String!
+  ) {
+    addMovie(
+      name: $name
+      rating: $rating
+      thumbnail: $thumbnail
+      description: $description
+      genre: $genre
+      video: $video
+    ) {
+      id
+      name
+      rating
+      thumbnail
+      description
+      genre
+      video
+    }
+  }
+`;
+
+```
+
+```
+const [body, setBody] = useState<movieState>({
+    name: "",
+    rating: 0,
+    thumbnail: "",
+    description: "",
+    genre: [],
+    video: "",
+});
+
+// useMutation 훅을 사용하여 addMovie 뮤테이션 호출 함수 생성
+const [addMovie] = useMutation(ADD_MOVIE_MUTATION);
+
+
+const handleSubmit = async () => {
+    try {
+      const { data } = await addMovie({
+        variables: {
+          name: body.name,
+          rating: body.rating,
+          thumbnail: body.thumbnail,
+          description: body.description,
+          genre: body.genre,
+          video: body.video,
+        },
+      });
+      console.log(data);
+      closeModal();
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+
+```

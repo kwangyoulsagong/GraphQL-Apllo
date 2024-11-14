@@ -2,6 +2,8 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { movieState } from "../../../types/movies";
 import styles from "./addModal.module.css";
+import { useMutation } from "@apollo/client";
+import { ADD_MOVIE_MUTATION } from "../../../schema/movies";
 interface closeModalState {
   closeModal: () => void;
 }
@@ -16,14 +18,18 @@ const AddModal = ({ closeModal }: closeModalState) => {
     genre: [],
     video: "",
   });
-
+  // useMutation 훅을 사용하여 addMovie 뮤테이션 호출 함수 생성
+  const [addMovie] = useMutation(ADD_MOVIE_MUTATION);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target;
 
     if (name != "genre") {
-      setBody((prev) => ({ ...prev, [name]: value }));
+      setBody((prev) => ({
+        ...prev,
+        [name]: name === "rating" ? parseFloat(value) : value,
+      }));
     }
   };
   const addGenre = () => {
@@ -38,8 +44,23 @@ const AddModal = ({ closeModal }: closeModalState) => {
       genre: prev.genre.filter((g) => g != genre),
     }));
   };
-  const handleSubmit = () => {
-    console.log(body);
+  const handleSubmit = async () => {
+    try {
+      const { data } = await addMovie({
+        variables: {
+          name: body.name,
+          rating: body.rating,
+          thumbnail: body.thumbnail,
+          description: body.description,
+          genre: body.genre,
+          video: body.video,
+        },
+      });
+      console.log(data);
+      closeModal();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

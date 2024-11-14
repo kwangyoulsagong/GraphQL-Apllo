@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 
-import { GET_MOVIES } from "../../schema/movies";
+import { GET_MOVIES_QUERY } from "../../schema/movies";
 import { movieState } from "../../types/movies";
 import { Heart, Star, Play } from "lucide-react";
 import styles from "./movie.module.css";
@@ -11,7 +11,7 @@ import MovieModal from "./modal/movieModal";
 import { moviesDataState } from "../../recoil/movieData";
 
 const Movie = () => {
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const { loading, error, data } = useQuery(GET_MOVIES_QUERY);
   const [moviesData, setMoviesData] = useRecoilState(moviesDataState);
   const [, setLink] = useRecoilState(videoLinkState);
   const [isModal, setIsModal] = useState(false);
@@ -55,7 +55,6 @@ const Movie = () => {
                     <Heart className={styles.icon} />
                   </button>
                 </div>
-
                 <div
                   className={styles.playButtonWrapper}
                   onClick={() => handleShowVideo(movie.video)}
