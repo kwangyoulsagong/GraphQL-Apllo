@@ -206,7 +206,36 @@
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
+.actionButtons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
 
+.iconButton {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.iconButton:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
 /* Error */
 .errorMessage {
   text-align: center;

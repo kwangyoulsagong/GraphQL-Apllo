@@ -1,5 +1,6 @@
 import movies from "../database/movie";
-
+let lastId =
+  movies.length > 0 ? Math.max(...movies.map((movie) => movie.id)) : 0;
 const resolvers = {
   Query: {
     movies: () => movies,
@@ -17,7 +18,7 @@ const resolvers = {
       // 데이터베이스에 추가
       // 새 영화 객체 생성
       const newMovie = {
-        id: movies.length + 1,
+        id: ++lastId,
         name,
         rating,
         thumbnail,
@@ -27,6 +28,30 @@ const resolvers = {
       };
       movies.push(newMovie);
       return newMovie;
+    },
+    updateMovie: (
+      _,
+      { id, name, rating, thumbnail, description, genre, video }
+    ) => {
+      // ID에 해당하는 영화 찾기
+      const movie = movies.find((movie) => movie.id === id);
+      if (!movie) return null;
+      // 업데이트할 필드를 객체로 구성
+      const fieldsToUpdate = {
+        name,
+        rating,
+        thumbnail,
+        description,
+        genre,
+        video,
+      };
+      // 각 필드를 확인하고, 정의된 값이 있는 경우에만 업데이트
+      Object.keys(fieldsToUpdate).forEach((key) => {
+        if (fieldsToUpdate[key] !== undefined) {
+          movie[key] = fieldsToUpdate[key];
+        }
+      });
+      return movie;
     },
   },
 };

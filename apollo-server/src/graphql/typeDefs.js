@@ -36,6 +36,16 @@ const typeDefs = gql`
       genre: [String!]
       video: String
     ): Movie!
+
+    updateMovie(
+      id: Int!
+      name: String
+      rating: Float
+      thumbnail: String
+      description: String
+      genre: [String]
+      video: String
+    ): Movie!
   }
 `;
 export default typeDefs;
